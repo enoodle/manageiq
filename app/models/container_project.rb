@@ -4,6 +4,7 @@ class ContainerProject < ActiveRecord::Base
   belongs_to :ext_management_system, :foreign_key => "ems_id"
   has_many :container_groups
   has_many :container_routes
+  has_many :container_builds
   has_many :container_replicators
   has_many :container_services
   has_many :container_definitions, :through => :container_groups

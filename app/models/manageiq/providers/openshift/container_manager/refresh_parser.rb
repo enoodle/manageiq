@@ -5,6 +5,7 @@ module ManageIQ::Providers
         super(inventory)
         get_projects(inventory)
         get_routes(inventory)
+        get_builds(inventory)
         EmsRefresh.log_inv_debug_trace(@data, "data:")
         @data
       end
@@ -19,6 +20,10 @@ module ManageIQ::Providers
         @data[:container_projects].each do |ns|
           @data_index.store_path(:container_projects, :by_name, ns[:name], ns)
         end
+      end
+
+      def get_builds(inventory)
+        process_collection(inventory["build"], :container_builds) { |n| parse_build(n) }
       end
 
       def parse_project(project_item)
@@ -45,6 +50,17 @@ module ManageIQ::Providers
                                                       route.metadata["table"][:namespace])
         new_result[:container_service] = @data_index.fetch_path(:container_services, :by_namespace_and_name,
                                                                 new_result[:namespace], get_service_name(route))
+        new_result
+      end
+
+      def parse_build(build)
+        new_result = parse_base_item(build)
+
+        new_result.merge!(
+          :labels     => parse_labels(build)
+        )
+        new_result[:project] = @data_index.fetch_path(:container_projects, :by_name,
+                                                      build.metadata["table"][:namespace])
         new_result
       end
     end
