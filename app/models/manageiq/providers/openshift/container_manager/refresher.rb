@@ -6,7 +6,7 @@ module ManageIQ::Providers
       KUBERNETES_EMS_TYPE = ManageIQ::Providers::Kubernetes::ContainerManager.ems_type
 
       def self.entities
-        [{:name => 'routes'}, {:name => 'projects'}, {:name => 'builds'}]
+        [{:name => 'routes'}, {:name => 'projects'}, {:name => 'builds'}, {:name => 'build_configs'}]
       end
 
       def parse_inventory(ems, _targets = nil)
