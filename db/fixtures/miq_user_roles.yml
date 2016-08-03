@@ -41,6 +41,7 @@
   - container_group
   - containers
   - container_node
+  - container_cockpit
   - persistent_volume
   - container_build
   - container_image_registry

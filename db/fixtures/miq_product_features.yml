@@ -3888,6 +3888,10 @@
       :description: Check Compliance of Last Known Configuration
       :feature_type: control
       :identifier: container_node_check_compliance
+    - :name: Cockpit
+      :description: Launch Cockpit Console
+      :feature_type: control
+      :identifier: container_cockpit
 
 # ContainerReplicator
 - :name: Replicators
