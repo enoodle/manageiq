@@ -116,4 +116,8 @@ module ContainerNodeHelper::TextualSummary
   def textual_compliance_history
     super(:title => _("Show Compliance History of this Node (Last 10 Checks)"))
   end
+
+  def textual_cockpit_terminal
+    "https://localhost:9090/cockpit/@" + @record.ipaddress + "/system/terminal.html"
+  end
 end

@@ -24,6 +24,7 @@ class ContainerNode < ApplicationRecord
   virtual_column :ready_condition_status, :type => :string, :uses => :container_conditions
   virtual_column :system_distribution, :type => :string
   virtual_column :kernel_version, :type => :string
+  virtual_column :ipaddress, :type => :string
 
   # Needed for metrics
   delegate :my_zone, :to => :ext_management_system
