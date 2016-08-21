@@ -32,6 +32,23 @@ class EmsContainerController < ApplicationController
     ems_form_fields
   end
 
+  def launch_common_logging
+    route_name = model.find_by_id(params[:id]).common_logging_route_name
+    logging_route = ContainerRoute.find_by_name(route_name)
+    if logging_route
+      url = URI::HTTPS.build(:host => logging_route.host_name)
+      render :update do |page|
+        page << javascript_prologue
+        page << "miqSparkle(false);"
+        page << "window.open('#{url}');"
+      end
+    else
+      add_flash(_("A route named '#{route_name}' is configured to connect to the " \
+                  "common_logging server but it doesn't exist"), :error)
+      javascript_flash
+    end
+  end
+
   private
 
   ############################

@@ -20,6 +20,10 @@ class ManageIQ::Providers::Openshift::ContainerManager < ManageIQ::Providers::Co
     ManageIQ::Providers::Openshift::ContainerManager::EventCatcher
   end
 
+  def common_logging_route_name
+    Settings.container_logging.common_logging_route
+  end
+
   def supported_auth_attributes
     %w(userid password auth_key)
   end

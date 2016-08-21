@@ -1,6 +1,7 @@
 module ManageIQ::Providers
   class ContainerManager < BaseManager
     include AvailabilityMixin
+    include SupportsFeatureMixin
 
     has_many :container_nodes, :foreign_key => :ems_id, :dependent => :destroy
     has_many :container_groups, :foreign_key => :ems_id, :dependent => :destroy
@@ -19,6 +20,10 @@ module ManageIQ::Providers
     has_many :container_build_pods, :foreign_key => :ems_id, :dependent => :destroy
     has_many :container_templates, :foreign_key => :ems_id, :dependent => :destroy
     has_one :container_deployment, :foreign_key => :deployed_ems_id, :inverse_of => :deployed_ems
+
+    supports :common_logging do
+      unsupported_reason_add(:common_logging, _('This provider type doesn\'t support common_logging')) unless respond_to?(:common_logging_route_name)
+    end
 
     # required by aggregate_hardware
     def all_computer_system_ids

@@ -1165,6 +1165,7 @@ Vmdb::Application.routes.draw do
         wait_for_task
         tagging_edit
         tag_edit_form_field_changed
+        launch_common_logging
       ) +
                adv_search_post +
                compare_post +
