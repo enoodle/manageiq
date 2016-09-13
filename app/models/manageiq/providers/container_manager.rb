@@ -22,7 +22,9 @@ module ManageIQ::Providers
     has_one :container_deployment, :foreign_key => :deployed_ems_id, :inverse_of => :deployed_ems
 
     supports :common_logging do
-      unsupported_reason_add(:common_logging, _('This provider type doesn\'t support common_logging')) unless respond_to?(:common_logging_route_name)
+      unless respond_to?(:common_logging_route_name)
+        unsupported_reason_add(:common_logging, _('This provider type doesn\'t support common_logging'))
+      end
     end
 
     # required by aggregate_hardware

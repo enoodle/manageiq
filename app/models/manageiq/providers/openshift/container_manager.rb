@@ -24,6 +24,10 @@ class ManageIQ::Providers::Openshift::ContainerManager < ManageIQ::Providers::Co
     Settings.container_logging.common_logging_route
   end
 
+  def common_logging_query
+    nil # should be empty to return all
+  end
+
   def supported_auth_attributes
     %w(userid password auth_key)
   end

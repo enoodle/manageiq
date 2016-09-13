@@ -70,6 +70,7 @@ module SupportsFeatureMixin
     :cinder_service             => 'Cinder storage service',
     :create_host_aggregate      => 'Host Aggregate Creation',
     :create_network_router      => 'Network Router Creation',
+    :common_logging             => 'Launch Common Logging UI',
     :swift_service              => 'Swift storage service',
     :delete                     => 'Deletion',
     :delete_aggregate           => 'Host Aggregate Deletion',

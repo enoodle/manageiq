@@ -6,7 +6,8 @@ class ApplicationHelper::Button::EmsContainerLaunchCommonLogging < ApplicationHe
   end
 
   def disabled?
-    !visible? || ContainerRoute.find_by(:name => @record.common_logging_route_name,
-                                        :ems_id => @record.id).blank?
+    ems = @record.ext_management_system
+    !visible? || ContainerRoute.find_by(:name   => ems.common_logging_route_name,
+                                        :ems_id => ems.id).blank?
   end
 end
