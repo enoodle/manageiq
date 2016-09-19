@@ -5,6 +5,7 @@ class ContainerGroup < ApplicationRecord
   include MiqPolicyMixin
   include NewWithTypeStiMixin
   include TenantIdentityMixin
+  include SupportsFeatureMixin
 
   # :name, :uid, :creation_timestamp, :resource_version, :namespace
   # :labels, :restart_policy, :dns_policy
@@ -95,5 +96,15 @@ class ContainerGroup < ApplicationRecord
     self.container_project_id = nil
     self.deleted_on = Time.now.utc
     save
+  end
+
+  supports :common_logging do
+    unless ext_management_system.respond_to?(:common_logging_route_name)
+      unsupported_reason_add(:common_logging, _('This provider type doesn\'t support common_logging'))
+    end
+  end
+
+  def common_logging_query
+    nil #{}.to_query # TODO
   end
 end

@@ -595,6 +595,7 @@ Vmdb::Application.routes.draw do
         tag_edit_form_field_changed
         protect
         squash_toggle
+        launch_common_logging
       ) +
                adv_search_post +
                exp_post +
