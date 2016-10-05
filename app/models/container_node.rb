@@ -88,4 +88,8 @@ class ContainerNode < ApplicationRecord
   def common_logging_query
     nil #{}.to_query # TODO
   end
+
+  def common_logging_path
+    nil
+  end
 end

@@ -28,6 +28,10 @@ class ManageIQ::Providers::Openshift::ContainerManager < ManageIQ::Providers::Co
     nil # should be empty to return all
   end
 
+  def common_logging_path
+    nil
+  end
+
   def supported_auth_attributes
     %w(userid password auth_key)
   end
