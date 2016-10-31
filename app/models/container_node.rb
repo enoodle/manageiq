@@ -90,6 +90,6 @@ class ContainerNode < ApplicationRecord
   end
 
   def common_logging_path
-    nil
+    '/'
   end
 end
