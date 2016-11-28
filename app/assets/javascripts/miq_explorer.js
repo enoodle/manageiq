@@ -60,8 +60,8 @@ ManageIQ.explorer.process = function(data) {
     case 'window':
       ManageIQ.explorer.processWindow(data);
       break;
-    case 'window_with_post':
-      ManageIQ.explorer.processWindowWithPost(data);
+    case 'window_with_cookie':
+      ManageIQ.explorer.processWindowWithCookie(data);
       break;
   }
 };
@@ -78,17 +78,18 @@ ManageIQ.explorer.addParamsToForm = function(form, params) {
   }
 };
 
-ManageIQ.explorer.processWindowWithPost = function(data) {
+ManageIQ.explorer.processWindowWithCookie = function(data) {
   if (_.isString(data.openUrl)) {
     var winName = 'NewWindow';
     var form = document.createElement("form");
-    form.setAttribute("method", "post");
+    form.setAttribute("method", "get");
     form.setAttribute("action", data.openUrl);
     form.setAttribute("target", winName);
-    ManageIQ.explorer.addParamsToForm(form, data.postParams);
 
+    document.cookie = data.cookieParams;
     document.body.appendChild(form);
     window.open('', winName);
+    debugger;
     form.submit();
     document.body.removeChild(form);
   }

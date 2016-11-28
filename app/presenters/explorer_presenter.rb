@@ -157,10 +157,10 @@ class ExplorerPresenter
     self
   end
 
-  def self.open_window_with_post_params(url, post_params)
-    new(:mode       => 'window_with_post',
-        :open_url   => url,
-        :postParams => post_params)
+  def self.open_window_with_cookie(url, cookie)
+    new(:mode        => 'window_with_cookie',
+        :open_url    => url,
+        :cookieParam => cookie)
   end
 
   def self.open_window(url)
@@ -177,11 +177,11 @@ class ExplorerPresenter
 
   def for_render
     case @options[:mode]
-    when 'main_div'           then for_render_main_div
-    when 'flash'              then for_render_flash
-    when 'buttons'            then for_render_buttons
-    when 'window'             then for_render_window
-    when 'window_with_post'   then for_render_window_with_post
+    when 'main_div'             then for_render_main_div
+    when 'flash'                then for_render_flash
+    when 'buttons'              then for_render_buttons
+    when 'window'               then for_render_window
+    when 'window_with_cookie'   then for_render_window_with_cookie
     else for_render_default
     end
   end
@@ -198,11 +198,11 @@ class ExplorerPresenter
     data
   end
 
-  def for_render_window_with_post
-    data = {:explorer => 'window_with_post'}
+  def for_render_window_with_cookie
+    data = {:explorer => 'window_with_cookie'}
     data[:openUrl] = @options[:open_url]
     data[:spinnerOff] = true if @options[:spinner_off]
-    data[:postParams] = @options[:postParams]
+    data[:cookieParam] = @options[:cookieParam]
     data
   end
 
