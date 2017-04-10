@@ -44,7 +44,7 @@ module Metric::ChargebackHelper
     when ContainerProject.name
       [parent_ems].compact
     when Container.name
-      [parent_ems]
+      [parent_ems].compact
     end
   end
 end
