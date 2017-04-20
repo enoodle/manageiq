@@ -318,6 +318,12 @@ module ManageIQ::Providers::Kubernetes
         )
       end
 
+      _log.info("identified pod: #{new_result[:name]} with containers:")
+      new_result[:container_definitions].each do |container_def|
+        container = container_def[:container]
+        _log.info("container name: #{container[:name]} container_image name: #{container[:container_image][:name]}")
+      end
+
       # NOTE: what we are trying to access here is the attribute:
       #   pod.metadata.annotations.kubernetes.io/created-by
       # but 'annotations' may be nil. The weird attribute name is
@@ -631,6 +637,7 @@ module ManageIQ::Providers::Kubernetes
       }
       state_attributes = parse_container_state container.lastState
       state_attributes.each { |key, val| h[key.to_s.prepend('last_').to_sym] = val } if state_attributes
+      _log.info("identified container: #{container[:name]} with image: #{h[:container_image][:name]}")
       h.merge!(parse_container_state(container.state))
     end
 
@@ -648,6 +655,8 @@ module ManageIQ::Providers::Kubernetes
 
     def parse_container_image(image, imageID)
       container_image, container_image_registry = parse_image_name(image, imageID)
+
+      _log.info("identified container_image: #{container_image[:name]}:#{container_image[:tag]} reference: #{container_image[:image_ref]}")
       host_port = nil
 
       unless container_image_registry.nil?
